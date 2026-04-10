@@ -1,0 +1,35 @@
+# Import required libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+# Step 1: Create a sample dataset
+data = {
+    'X': [2, 3, 3, 5, 8, 7, 9, 10],
+    'Y': [3, 4, 5, 8, 7, 6, 9, 10]}
+df = pd.DataFrame(data)
+
+# Step 2: Select number of clusters
+k = 2
+
+# Step 3: Apply K-Means clustering
+kmeans = KMeans(n_clusters=k, random_state=42)
+df['Cluster'] = kmeans.fit_predict(df)
+
+# Step 4: Display clustered data
+print("Clustered Data:")
+print(df)
+
+# Step 5: Plot the clusters
+plt.scatter(df['X'], df['Y'], c=df['Cluster'])
+plt.scatter(
+    kmeans.cluster_centers_[:, 0],
+    kmeans.cluster_centers_[:, 1],
+    marker='x',
+    s=200
+)
+
+plt.xlabel("X Axis")
+plt.ylabel("Y Axis")
+plt.title("K-Means Clustering")
+plt.show()
