@@ -1,0 +1,21 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+# Dataset
+data = {
+    "Marks": [30, 35, 40, 45, 50, 55, 60, 65, 70, 75],
+    "Result": [0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+}
+
+df = pd.DataFrame(data)
+X = df[["Marks"]]
+y = df["Result"]
+# Train-Test Split (30%)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
+# Model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+# Prediction
+y_pred = model.predict(X_test)
+print("New Accuracy with 30% test size:", accuracy_score(y_test, y_pred))
