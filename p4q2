@@ -1,0 +1,30 @@
+#k-Nearest Neighbor (0) Classification Program
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score,f1_score 
+
+#Load dataset
+data = load_iris()
+X = data.data
+y = data.target
+
+#Split dataset into training and testing anta
+X_train, X_test, y_train, y_test = train_test_split (
+    X, y, test_size=0.2, random_state=42
+)
+#Create KNN model
+knn_model = KNeighborsClassifier(n_neighbors=5)
+
+#Train model
+knn_model.fit(X_train, y_train)
+
+#Predict
+y_pred = knn_model.predict(X_test)
+
+#Evaluate performance
+print("X-Nearest Neighbor Performance:")
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Precision:", precision_score(y_test, y_pred, average="macro"))
+print("Recalls", recall_score(y_test,y_pred, average="macro"))
+print("Fl Score:", f1_score(y_test,y_pred, average="macro"))
